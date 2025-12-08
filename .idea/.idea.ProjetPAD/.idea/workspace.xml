@@ -7,25 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="45163c4c-741c-40bd-9718-2d6a56cc7e3b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetPAD.sln" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetPAD/App.axaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetPAD/App.axaml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetPAD/Game/GameManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetPAD/Models/Archer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetPAD/Models/Guerrier.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetPAD/Models/Guild.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetPAD/Models/Hero.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetPAD/Models/Mage.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetPAD/Program.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetPAD/ProjetPAD.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetPAD/UI/MainWindow.axaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetPAD/UI/MainWindow.axaml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetPAD/UI/MarchandWindow.axaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetPAD/UI/MarchandWindow.axaml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetPAD/app.manifest" afterDir="false" />
-    </list>
+    <list default="true" id="45163c4c-741c-40bd-9718-2d6a56cc7e3b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,6 +26,7 @@
     <setting file="file://$PROJECT_DIR$/ProjetPAD/UI/MarchandWindow.axaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetPAD/UI/MarchandWindow.axaml.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 8
 }]]></component>
@@ -59,6 +42,7 @@
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "master",
@@ -104,16 +88,37 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1765225402421</updated>
-      <workItem from="1765225405350" duration="1440000" />
+      <workItem from="1765225405350" duration="1857000" />
     </task>
+    <task id="LOCAL-00001" summary="Debut du projet creation des classes">
+      <option name="closed" value="true" />
+      <created>1765226934956</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1765226934956</updated>
+    </task>
+    <task id="LOCAL-00002" summary=".">
+      <option name="closed" value="true" />
+      <created>1765227019086</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1765227019086</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Debut du projet creation des classes" />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
