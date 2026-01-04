@@ -7,7 +7,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="45163c4c-741c-40bd-9718-2d6a56cc7e3b" name="Changes" comment="" />
+    <list default="true" id="45163c4c-741c-40bd-9718-2d6a56cc7e3b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/ProjetPAD/Models/Archer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetPAD/Models/Archer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetPAD/Models/Guerrier.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetPAD/Models/Guerrier.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetPAD/Models/Guild.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetPAD/Models/Guild.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetPAD/Models/Hero.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetPAD/Models/Hero.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetPAD/Models/Mage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetPAD/Models/Mage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetPAD/Models/Mission.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetPAD/Models/Mission.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetPAD/Models/MissionResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetPAD/Models/MissionResult.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,6 +24,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "aymanmechal"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/aymanmechal/DonjonPAD.git",
+    "accountId": "0d1c41a4-5c55-4848-9787-220736222014"
+  }
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/ProjetPAD/Game/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetPAD/Models/Archer.cs" root0="FORCE_HIGHLIGHTING" />
@@ -27,9 +47,9 @@
     <setting file="file://$PROJECT_DIR$/ProjetPAD/UI/MarchandWindow.axaml.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="36ZsP93m2bvNuCi5Hmb9XdTd8hg" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -45,7 +65,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -62,10 +82,8 @@
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="PASS_PARENT_ENVS" value="1" />
-      <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="ENV_FILE_PATHS" value="" />
       <option name="REDIRECT_INPUT_PATH" value="" />
-      <option name="PTY_MODE" value="Auto" />
       <option name="MIXED_MODE_DEBUG" value="0" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
@@ -89,6 +107,7 @@
       <option name="presentableId" value="Default" />
       <updated>1765225402421</updated>
       <workItem from="1765225405350" duration="1857000" />
+      <workItem from="1767522546856" duration="3640000" />
     </task>
     <task id="LOCAL-00001" summary="Debut du projet creation des classes">
       <option name="closed" value="true" />

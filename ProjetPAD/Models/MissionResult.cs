@@ -1,12 +1,10 @@
 namespace ProjetPAD.Models {
     public class MissionResult {
-        // Champs privés
         private bool success;
         private int damageTaken;
         private int foodGained;
         private int goldGained;
 
-        // Constructeur
         public MissionResult(bool success, int damageTaken, int foodGained, int goldGained) {
             this.success = success;
             this.damageTaken = damageTaken;
@@ -14,7 +12,6 @@ namespace ProjetPAD.Models {
             this.goldGained = goldGained;
         }
 
-        // Getters / Setters
         public bool GetSuccess() {
             return success;
         }

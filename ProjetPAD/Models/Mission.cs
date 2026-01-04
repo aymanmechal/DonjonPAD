@@ -1,68 +1,82 @@
-namespace ProjetPAD.Models {
-    public class Mission {
-        // Champs privés
+namespace ProjetPAD.Models
+{
+    public class Mission
+    {
         private string name;
         private int difficulty;
         private int rewardFood;
         private int rewardGold;
 
-        // Constructeur
-        public Mission(string name, int difficulty, int rewardFood, int rewardGold) {
+        public Mission(string name, int difficulty, int rewardFood, int rewardGold)
+        {
             this.name = name;
-            this.difficulty = difficulty;
+            this.difficulty = difficulty < 0 ? 0 : difficulty;
             this.rewardFood = rewardFood;
             this.rewardGold = rewardGold;
         }
 
-        // Getters / Setters
-        public string GetName() {
+        public string GetName()
+        {
             return name;
         }
 
-        public void SetName(string value) {
+        public void SetName(string value)
+        {
             name = value;
         }
 
-        public int GetDifficulty() {
+        public int GetDifficulty()
+        {
             return difficulty;
         }
 
-        public void SetDifficulty(int value) {
-            difficulty = value;
+        public void SetDifficulty(int value)
+        {
+            difficulty = value < 0 ? 0 : value;
         }
 
-        public int GetRewardFood() {
+        public int GetRewardFood()
+        {
             return rewardFood;
         }
 
-        public void SetRewardFood(int value) {
+        public void SetRewardFood(int value)
+        {
             rewardFood = value;
         }
 
-        public int GetRewardGold() {
+        public int GetRewardGold()
+        {
             return rewardGold;
         }
 
-        public void SetRewardGold(int value) {
+        public void SetRewardGold(int value)
+        {
             rewardGold = value;
         }
 
-        // Méthode de résolution
-        public MissionResult Resolve(Hero hero) {
+        public MissionResult Resolve(Hero hero)
+        {
             bool success;
             int damageTaken;
             int foodGained;
             int goldGained;
 
-            if (hero.GetPower() >= difficulty) {
+            if (hero.GetPower() >= difficulty)
+            {
                 success = true;
                 damageTaken = difficulty / 2;
+                if (damageTaken < 1) damageTaken = 1;
+
                 foodGained = rewardFood;
                 goldGained = rewardGold;
             }
-            else {
+            else
+            {
                 success = false;
                 damageTaken = difficulty;
+                if (damageTaken < 1) damageTaken = 1;
+
                 foodGained = 0;
                 goldGained = 0;
             }

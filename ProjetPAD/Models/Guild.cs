@@ -1,145 +1,119 @@
 using System.Collections.Generic;
 
-namespace ProjetPAD.Models;
-
-public class Guild
+namespace ProjetPAD.Models
 {
-    // Champs privés
-    private string name;
-    private List<Hero> heroes;
-    private int gold;
-    private int food;
-    private List<Mission> missions;
-
-    // Constructeur
-    public Guild(string name)
+    public class Guild
     {
-        this.name = name;
-        this.heroes = new List<Hero>();
-        this.gold = 100;   // valeur initiale
-        this.food = 50;    // valeur initiale
-        this.missions = new List<Mission>();
-    }
+        private string name;
+        private List<Hero> heroes;
+        private int gold;
+        private int food;
+        private List<Mission> missions;
 
-    // Getters / Setters
-    public string GetName()
-    {
-        return name;
-    }
-
-    public void SetName(string value)
-    {
-        name = value;
-    }
-
-    public List<Hero> GetHeroes()
-    {
-        return heroes;
-    }
-
-    public int GetGold()
-    {
-        return gold;
-    }
-
-    public void SetGold(int value)
-    {
-        gold = value;
-    }
-
-    public int GetFood()
-    {
-        return food;
-    }
-
-    public void SetFood(int value)
-    {
-        food = value;
-    }
-
-    public List<Mission> GetMissions()
-    {
-        return missions;
-    }
-
-    // Méthodes de gestion
-    public void AddHero(Hero hero)
-    {
-        heroes.Add(hero);
-    }
-
-    public void RemoveHero(Hero hero)
-    {
-        heroes.Remove(hero);
-    }
-
-    public void AddMission(Mission mission)
-    {
-        missions.Add(mission);
-    }
-
-    public void RemoveMission(Mission mission)
-    {
-        missions.Remove(mission);
-    }
-
-    public void PaySalaries()
-    {
-        foreach (Hero hero in heroes)
+        public Guild(string name)
         {
-            gold = gold - hero.GetSalary();
-        }
-    }
-
-    public void FeedHeroes()
-    {
-        food = food - heroes.Count;
-    }
-
-    public void ResolveMission(Mission mission, Hero hero)
-    {
-        MissionResult result = mission.Resolve(hero);
-
-        if (result.Success)
-        {
-            food = food + result.FoodGained;
-            gold = gold + result.GoldGained;
+            this.name = name;
+            heroes = new List<Hero>();
+            missions = new List<Mission>();
+            gold = 100;
+            food = 50;
         }
 
-        // Le héros a déjà pris des dégâts et de la fatigue dans Resolve()
-    }
-
-    // Vérification des conditions de défaite
-    public bool IsDefeated()
-    {
-        // Tous les héros morts
-        bool allDead = true;
-        foreach (Hero hero in heroes)
+        public string GetName()
         {
-            if (hero.GetHealth() > 0)
+            return name;
+        }
+
+        public void SetName(string value)
+        {
+            name = value;
+        }
+
+        public List<Hero> GetHeroes()
+        {
+            return heroes;
+        }
+
+        public int GetGold()
+        {
+            return gold;
+        }
+
+        public int GetFood()
+        {
+            return food;
+        }
+
+        public List<Mission> GetMissions()
+        {
+            return missions;
+        }
+
+        public void AddHero(Hero hero)
+        {
+            heroes.Add(hero);
+        }
+
+        public void RemoveDeadHeroes()
+        {
+            for (int i = heroes.Count - 1; i >= 0; i--)
             {
-                allDead = false;
-                break;
+                if (heroes[i].GetHealth() <= 0)
+                {
+                    heroes.RemoveAt(i);
+                }
             }
         }
 
-        if (allDead)
+        public void AddMission(Mission mission)
         {
-            return true;
+            missions.Add(mission);
         }
 
-        // Pas assez de nourriture
-        if (food < 0)
+        public void PaySalaries()
         {
-            return true;
+            foreach (Hero hero in heroes)
+            {
+                gold -= hero.GetSalary();
+            }
         }
 
-        // Plus de ressources critiques
-        if (gold < 0)
+        public void FeedHeroes()
         {
-            return true;
+            foreach (Hero hero in heroes)
+            {
+                if (food > 0)
+                {
+                    food--;
+                }
+                else
+                {
+                    hero.TakeDamage(5);
+                }
+            }
         }
 
-        return false;
+        public MissionResult ResolveMission(Mission mission, Hero hero)
+        {
+            MissionResult result = mission.Resolve(hero);
+
+            gold += result.GetGoldGained();
+            food += result.GetFoodGained();
+
+            RemoveDeadHeroes();
+
+            return result;
+        }
+
+        public bool IsDefeated()
+        {
+            if (heroes.Count == 0)
+                return true;
+
+            if (food < 0 || gold < 0)
+                return true;
+
+            return false;
+        }
     }
 }

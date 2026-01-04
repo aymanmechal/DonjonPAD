@@ -2,15 +2,13 @@ namespace ProjetPAD.Models
 {
     public class Hero
     {
-        // Champs privés
         private string name;
         private int health;
         private int maxHealth;
         private int fatigue;
         private int salary;
         private int power;
-
-        // Constructeur
+        
         public Hero(string name, int maxHealth, int salary, int power)
         {
             this.name = name;
@@ -21,7 +19,6 @@ namespace ProjetPAD.Models
             this.fatigue = 0;
         }
 
-        // Getters / Setters
         public string GetName()
         {
             return name;
@@ -82,7 +79,6 @@ namespace ProjetPAD.Models
             power = value;
         }
 
-        // Méthodes
         public void TakeDamage(int amount)
         {
             health = health - amount;
@@ -115,7 +111,6 @@ namespace ProjetPAD.Models
             }
         }
 
-        // Méthode virtuelle
         public virtual void Rest()
         {
             ReduceFatigue(10);
