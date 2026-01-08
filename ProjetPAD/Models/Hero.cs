@@ -1,14 +1,35 @@
+using System.ComponentModel;
+
 namespace ProjetPAD.Models
 {
-    public class Hero
+    public class Hero : INotifyPropertyChanged
     {
+        // =====================================================
+        // Champs privés
+        // =====================================================
         private string name;
         private int health;
         private int maxHealth;
         private int fatigue;
         private int salary;
         private int power;
+        private bool isOnMission;
+        public int Salary => salary;
+        public string ClassName => GetType().Name;
+        public int RecruitCost => recruitCost;
+
         
+        protected int recruitCost;
+
+        public int GetRecruitCost()
+        {
+            return recruitCost;
+        }
+
+
+        // =====================================================
+        // Constructeur
+        // =====================================================
         public Hero(string name, int maxHealth, int salary, int power)
         {
             this.name = name;
@@ -17,98 +38,75 @@ namespace ProjetPAD.Models
             this.salary = salary;
             this.power = power;
             this.fatigue = 0;
+            this.isOnMission = false;
         }
 
-        public string GetName()
+        // =====================================================
+        // ? Notification UI
+        // =====================================================
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        private void Notify(string prop)
         {
-            return name;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
 
-        public void SetName(string value)
+        // =====================================================
+        // ? MÉTHODES EXISTANTES (ON NE LES SUPPRIME PAS)
+        // =====================================================
+        public string GetName() => name;
+        public int GetHealth() => health;
+        public int GetMaxHealth() => maxHealth;
+        public int GetFatigue() => fatigue;
+        public int GetSalary() => salary;
+        public int GetPower() => power;
+
+        public bool IsOnMission() => isOnMission;
+
+        public void SetOnMission(bool value)
         {
-            name = value;
+            isOnMission = value;
+            Notify(nameof(IsOnMissionProperty));
         }
 
-        public int GetHealth()
-        {
-            return health;
-        }
+        // =====================================================
+        // ? PROPRIÉTÉS POUR AVALONIA (EN PLUS)
+        // =====================================================
+        public string Name => name;
+        public int Health => health;
+        public int MaxHealth => maxHealth;
+        public int Fatigue => fatigue;
+        public int Power => power;
+        public bool IsOnMissionProperty => isOnMission;
 
-        public void SetHealth(int value)
-        {
-            health = value;
-        }
-
-        public int GetMaxHealth()
-        {
-            return maxHealth;
-        }
-
-        public void SetMaxHealth(int value)
-        {
-            maxHealth = value;
-        }
-
-        public int GetFatigue()
-        {
-            return fatigue;
-        }
-
-        public void SetFatigue(int value)
-        {
-            fatigue = value;
-        }
-
-        public int GetSalary()
-        {
-            return salary;
-        }
-
-        public void SetSalary(int value)
-        {
-            salary = value;
-        }
-
-        public int GetPower()
-        {
-            return power;
-        }
-
-        public void SetPower(int value)
-        {
-            power = value;
-        }
-
+        // =====================================================
+        // Logique métier (notifiée)
+        // =====================================================
         public void TakeDamage(int amount)
         {
-            health = health - amount;
-            if (health < 0)
-            {
-                health = 0;
-            }
+            health -= amount;
+            if (health < 0) health = 0;
+            Notify(nameof(Health));
         }
 
         public void Heal(int amount)
         {
-            health = health + amount;
-            if (health > maxHealth)
-            {
-                health = maxHealth;
-            }
+            health += amount;
+            if (health > maxHealth) health = maxHealth;
+            Notify(nameof(Health));
         }
 
         public void AddFatigue(int amount)
         {
-            fatigue = fatigue + amount;
+            fatigue += amount;
+            Notify(nameof(Fatigue));
         }
 
         public void ReduceFatigue(int amount)
         {
-            fatigue = fatigue - amount;
-            if (fatigue < 0)
-            {
-                fatigue = 0;
-            }
+            fatigue -= amount;
+            if (fatigue < 0) fatigue = 0;
+            Notify(nameof(Fatigue));
         }
 
         public virtual void Rest()

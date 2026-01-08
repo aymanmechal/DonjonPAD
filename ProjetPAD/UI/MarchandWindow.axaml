@@ -1,8 +1,12 @@
-<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="ProjetPAD.UI.MarchandWindow">
-    Welcome to Avalonia!
-</UserControl>
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="ProjetPAD.UI.MerchantWindow"
+        Width="400" Height="300"
+        Title="Marchand">
+    <StackPanel Margin="10">
+        <TextBlock Text="Acheter des potions" FontSize="18"/>
+        <ListBox x:Name="PotionList"/>
+        <Button Content="Acheter" Click="OnBuy"/>
+        <TextBlock x:Name="InfoText"/>
+    </StackPanel>
+</Window>

@@ -5,77 +5,119 @@ namespace ProjetPAD.Models
     public class Guild
     {
         private string name;
+
+        // Équipe active
         private List<Hero> heroes;
+
+        // Réserve
+        private List<Hero> reserveHeroes;
+
+        private List<Mission> missions;
+        private List<Potion> potions;
+
         private int gold;
         private int food;
-        private List<Mission> missions;
+
+        public void SpendGold(int amount)
+        {
+            gold -= amount;
+            if (gold < 0)
+                gold = 0;
+        }
 
         public Guild(string name)
         {
             this.name = name;
             heroes = new List<Hero>();
+            reserveHeroes = new List<Hero>();
             missions = new List<Mission>();
+            potions = new List<Potion>();
             gold = 100;
             food = 50;
         }
 
-        public string GetName()
+        // ===================
+        // GETTERS
+        // ===================
+
+        public string GetName() => name;
+        public List<Hero> GetHeroes() => heroes;
+        public List<Hero> GetReserveHeroes() => reserveHeroes;
+        public List<Mission> GetMissions() => missions;
+        public List<Potion> GetPotions() => potions;
+
+        public int GetGold() => gold;
+        public int GetFood() => food;
+
+        public void SetMissions(List<Mission> missions)
         {
-            return name;
+            this.missions = missions;
         }
 
-        public void SetName(string value)
-        {
-            name = value;
-        }
+        // ===================
+        // HÉROS
+        // ===================
 
-        public List<Hero> GetHeroes()
-        {
-            return heroes;
-        }
-
-        public int GetGold()
-        {
-            return gold;
-        }
-
-        public int GetFood()
-        {
-            return food;
-        }
-
-        public List<Mission> GetMissions()
-        {
-            return missions;
-        }
-
+        // Héros de départ
         public void AddHero(Hero hero)
         {
             heroes.Add(hero);
         }
 
-        public void RemoveDeadHeroes()
+        // 🔥 Réserve → Actif
+        public bool AddHeroToActive(Hero hero)
         {
-            for (int i = heroes.Count - 1; i >= 0; i--)
-            {
-                if (heroes[i].GetHealth() <= 0)
-                {
-                    heroes.RemoveAt(i);
-                }
-            }
+            if (heroes.Count >= 4)
+                return false;
+
+            if (!reserveHeroes.Contains(hero))
+                return false;
+
+            reserveHeroes.Remove(hero);
+            heroes.Add(hero);
+            return true;
         }
 
-        public void AddMission(Mission mission)
+        // 🔥 Actif → Réserve
+        public void MoveHeroToReserve(Hero hero)
         {
-            missions.Add(mission);
+            if (hero.IsOnMission())
+                return;
+
+            heroes.Remove(hero);
+            reserveHeroes.Add(hero);
         }
+
+        // Recrutement
+        public void AddHeroToReserve(Hero hero)
+        {
+            reserveHeroes.Add(hero);
+        }
+
+        public void RemoveDeadHeroes()
+        {
+            heroes.RemoveAll(h => h.GetHealth() <= 0);
+        }
+
+        // ===================
+        // MISSIONS
+        // ===================
+
+        public void ResolveMissionRewards(MissionResult result)
+        {
+            gold += result.GetGoldGained();
+            food += result.GetFoodGained();
+            RemoveDeadHeroes();
+        }
+
+        // ===================
+        // ÉCONOMIE
+        // ===================
 
         public void PaySalaries()
         {
             foreach (Hero hero in heroes)
-            {
                 gold -= hero.GetSalary();
-            }
         }
 
         public void FeedHeroes()
@@ -83,34 +125,45 @@ namespace ProjetPAD.Models
             foreach (Hero hero in heroes)
             {
                 if (food > 0)
-                {
                     food--;
-                }
                 else
-                {
                     hero.TakeDamage(5);
-                }
             }
         }
 
-        public MissionResult ResolveMission(Mission mission, Hero hero)
+        // ===================
+        // POTIONS
+        // ===================
+
+        public bool BuyPotion(Potion potion)
         {
-            MissionResult result = mission.Resolve(hero);
+            if (gold < potion.GetPrice())
+                return false;
 
-            gold += result.GetGoldGained();
-            food += result.GetFoodGained();
-
-            RemoveDeadHeroes();
-
-            return result;
+            gold -= potion.GetPrice();
+            potions.Add(potion);
+            return true;
         }
+
+        public void UsePotion(Potion potion, Hero hero)
+        {
+            if (!potions.Contains(potion))
+                return;
+
+            hero.Heal(potion.GetHealAmount());
+            potions.Remove(potion);
+        }
+
+        // ===================
+        // DÉFAITE
+        // ===================
 
         public bool IsDefeated()
         {
             if (heroes.Count == 0)
                 return true;
 
-            if (food < 0 || gold < 0)
+            if (gold < 0 || food < 0)
                 return true;
 
             return false;

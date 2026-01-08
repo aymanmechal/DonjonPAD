@@ -3,7 +3,12 @@
   <component name="AvaloniaProject">
     <option name="projectPerEditor">
       <map>
+        <entry key="ProjetPAD/App.axaml" value="ProjetPAD/ProjetPAD.csproj" />
         <entry key="ProjetPAD/MainWindow.axaml" value="ProjetPAD/ProjetPAD.csproj" />
+        <entry key="ProjetPAD/UI/Hero.axaml" value="ProjetPAD/ProjetPAD.csproj" />
+        <entry key="ProjetPAD/UI/MainWindow.axaml" value="ProjetPAD/ProjetPAD.csproj" />
+        <entry key="ProjetPAD/UI/MarchandWindow.axaml" value="ProjetPAD/ProjetPAD.csproj" />
+        <entry key="ProjetPAD/UI/Recruitment.axaml" value="ProjetPAD/ProjetPAD.csproj" />
       </map>
     </option>
   </component>

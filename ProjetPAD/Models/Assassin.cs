@@ -1,10 +1,10 @@
 namespace ProjetPAD.Models
 {
-    public class Archer : Hero
+    public class Assassin : Hero
     {
-        public Archer(string name)
-            : base(name, maxHealth: 100, salary: 12, power: 18)
-        {
+        public Assassin(string name)
+            : base(name, maxHealth: 30, salary: 24, power: 40)
+        { recruitCost = 50;
         }
         
         public override void Rest()
