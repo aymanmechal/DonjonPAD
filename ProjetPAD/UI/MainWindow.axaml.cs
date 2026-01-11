@@ -123,44 +123,99 @@ namespace ProjetPAD.UI
         // =====================================================
         // ⏭️ PHASES
         // =====================================================
-        private void OnNextPhase(object? sender, RoutedEventArgs e)
+        private async void OnNextPhase(object? sender, RoutedEventArgs e)
         {
             gm.NextPhase();
-            UpdateUI();
-            UpdatePhaseUI();
+            RefreshUI();
+            await ShowEventPopupIfAnyAsync();
         }
 
         // =====================================================
         // ⚔️ MISSIONS
         // =====================================================
-        private void OnDoMission(object? sender, RoutedEventArgs e)
+        private async void OnDoMission(object? sender, RoutedEventArgs e)
         {
-            if (HeroesList.SelectedItems == null || HeroesList.SelectedItems.Count == 0 || MissionsList.SelectedIndex < 0)
+            var guild = gm.GetPlayerGuild();
+            int missionIndex = MissionsList.SelectedIndex >= 0 ? MissionsList.SelectedIndex : 0;
+
+            var heroes = guild.GetHeroes();
+            int heroIndex;
+            if (HeroesList.SelectedIndex >= 0)
+                heroIndex = HeroesList.SelectedIndex;
+            else
+                heroIndex = 0;
+
+            // Sécurités de bornes
+            if (heroes.Count == 0 || guild.GetMissions().Count == 0)
             {
-                ResultText.Text = "Sélectionne au moins un héros et une mission.";
+                ResultText.Text = "Aucun héros ou mission disponible.";
                 return;
             }
+            if (heroIndex < 0 || heroIndex >= heroes.Count)
+                heroIndex = 0;
+            if (missionIndex < 0 || missionIndex >= guild.GetMissions().Count)
+                missionIndex = 0;
 
-            var allHeroes = gm.GetPlayerGuild().GetHeroes();
-            List<int> heroIndexes = new();
-
-            foreach (Hero hero in HeroesList.SelectedItems.Cast<Hero>())
-                if (!hero.IsOnMission())
-                    heroIndexes.Add(allHeroes.IndexOf(hero));
-
-            if (heroIndexes.Count == 0)
-            {
-                ResultText.Text = "Tous les héros sélectionnés sont déjà en mission.";
-                return;
-            }
-
-            bool started = gm.StartMission(MissionsList.SelectedIndex, heroIndexes);
+            // Un seul héros et une seule mission
+            bool started = gm.StartMission(missionIndex, new List<int> { heroIndex });
 
             ResultText.Text = started
-                ? "Mission lancée ! Les héros sont partis en mission."
+                ? "Mission lancée !"
                 : "Impossible de lancer la mission.";
 
+            RefreshUI();
+            await ShowEventPopupIfAnyAsync();
+        }
+
+        // Helper pour uniformiser la MAJ de l'UI demandée
+        private void RefreshUI()
+        {
             UpdateUI();
+            UpdatePhaseUI();
+        }
+
+        // Popup d'événement simple en code-behind
+        private async System.Threading.Tasks.Task ShowEventPopupIfAnyAsync()
+        {
+            var ev = gm.GetLastEvent();
+            if (ev == null)
+                return;
+
+            var stack = new StackPanel { Spacing = 8, Margin = new Avalonia.Thickness(12) };
+            stack.Children.Add(new TextBlock { Text = ev.Description, TextWrapping = Avalonia.Media.TextWrapping.Wrap });
+
+            string deltaLine(string label, int value)
+                => value == 0 ? null : $"{label}: {value:+#;-#;0}";
+
+            var lines = new List<string?>
+            {
+                deltaLine("GoldDelta", ev.GoldDelta),
+                deltaLine("FoodDelta", ev.FoodDelta),
+                deltaLine("HealthDelta", ev.HealthDelta),
+                deltaLine("FatigueDelta", ev.FatigueDelta)
+            };
+
+            foreach (var line in lines)
+            {
+                if (!string.IsNullOrWhiteSpace(line))
+                    stack.Children.Add(new TextBlock { Text = line });
+            }
+
+            var okButton = new Button { Content = "OK", HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center, Margin = new Avalonia.Thickness(0, 10, 0, 0) };
+
+            var popup = new Window
+            {
+                Title = ev.Name,
+                Width = 360,
+                Height = 220,
+                CanResize = false,
+                Content = new StackPanel { Children = { stack, okButton } }
+            };
+
+            okButton.Click += (_, __) => popup.Close();
+
+            await popup.ShowDialog(this);
+            gm.ClearLastEvent();
         }
 
         // =====================================================

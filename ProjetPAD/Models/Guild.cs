@@ -55,6 +55,21 @@ namespace ProjetPAD.Models
         }
 
         // ===================
+        // MODIFS MINIMALES POUR ÉVÉNEMENTS
+        // ===================
+        public void AddGold(int delta)
+        {
+            gold += delta;
+            if (gold < 0) gold = 0; // clamp à 0
+        }
+
+        public void AddFood(int delta)
+        {
+            food += delta;
+            if (food < 0) food = 0; // clamp à 0
+        }
+
+        // ===================
         // HÉROS
         // ===================
 

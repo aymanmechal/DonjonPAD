@@ -20,6 +20,10 @@ namespace ProjetPAD.Game
 
         private Random rng = new Random();
 
+        // 🎲 Événements aléatoires
+        private EventManager eventManager = new EventManager();
+        private GameEvent? lastEvent; // L'UI pourra afficher ceci si non-null
+
         public static GameManager GetInstance()
         {
             instance ??= new GameManager();
@@ -170,6 +174,19 @@ namespace ProjetPAD.Game
             }
 
             playerGuild.RemoveDeadHeroes();
+
+            // Déclenchement d'un événement aléatoire en fin de soirée
+            // UI: si lastEvent != null, afficher une popup avec lastEvent.Name/Description
+            var ev = eventManager.TryRollEvent(25);
+            if (ev != null)
+            {
+                ev.Apply(playerGuild);
+                lastEvent = ev;
+            }
+            else
+            {
+                lastEvent = null;
+            }
         }
 
         // =======================
@@ -217,5 +234,16 @@ namespace ProjetPAD.Game
 
         public IReadOnlyList<Hero> GetReserveHeroes()
             => playerGuild.GetReserveHeroes();
+
+        // =======================
+        // 🎲 ÉVÉNEMENTS
+        // =======================
+        public GameEvent? GetLastEvent() => lastEvent;
+        
+        public void ClearLastEvent()
+        {
+            lastEvent = null;
+        }
+
     }
 }
